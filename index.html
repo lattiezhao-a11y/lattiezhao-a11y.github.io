@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087bd5">
+  <meta name="description" content="Aero Garden, an interactive Frutiger Aero landscape.">
+  <title>Aero Garden</title>
+  <link rel="preload" href="assets/aero-glass-garden.webp" as="image">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+  <script src="portfolio.js" defer></script>
+  <script src="preview-audio.js?v=2" defer></script>
+  <script src="assets/audio-data/studio-02.js" defer></script>
+  <script src="assets/audio-data/studio-03.js" defer></script>
+  <script src="assets/audio-data/studio-04.js" defer></script>
+  <script src="assets/audio-data/studio-05.js" defer></script>
+  <script src="assets/audio-data/studio-06.js" defer></script>
+  <script src="assets/audio-data/studio-07.js" defer></script>
+  <script src="assets/audio-data/studio-08.js" defer></script>
+  <script src="assets/audio-data/studio-09.js" defer></script>
+  <script src="assets/audio-data/studio-10.js" defer></script>
+  <script src="assets/audio-data/studio-11.js" defer></script>
+  <script src="studio.js" defer></script>
+</head>
+<body>
+  <main class="garden" id="garden" aria-labelledby="garden-title">
+    <div class="world">
+      <img class="landscape" src="assets/aero-glass-garden.webp" alt="" width="1672" height="941" fetchpriority="high">
+      <button type="button" class="water" aria-label="Touch the lake to make ripples">
+        <span class="fish fish-clown" aria-hidden="true"><img src="assets/clownfish.webp" alt=""></span>
+        <span class="fish fish-tang" aria-hidden="true"><img src="assets/blue-tang.webp" alt=""></span>
+        <span class="fish fish-yellow" aria-hidden="true"><img src="assets/butterflyfish.webp" alt=""></span>
+        <span class="fish fish-small" aria-hidden="true"><img src="assets/clownfish.webp" alt=""></span>
+      </button>
+      <a class="tower-entry" href="#studio" aria-label="Explore the glass conservatory"></a>
+    </div>
+    <div class="shade" aria-hidden="true"></div>
+
+    <header class="welcome">
+      <p class="byline"><img src="assets/latties-glass.webp" alt="Lattie's" width="400" height="116"></p>
+      <h1 id="garden-title"><img class="wordmark" src="assets/aero-garden-wordmark.webp" alt="Aero Garden" width="1000" height="547" fetchpriority="high"></h1>
+      <p class="greeting"><img src="assets/sit-with-me-glass.webp" alt="sit with me and think" width="720" height="92"></p>
+    </header>
+
+    <button class="halo" type="button" aria-label="Light up the halo"><img class="halo-ring" src="assets/light-ring.webp" alt=""></button>
+
+    <button class="bubble bubble-near" type="button" aria-label="Pop the large bubble"></button>
+    <button class="bubble bubble-high" type="button" aria-label="Pop the small bubble"></button>
+    <button class="bubble bubble-low" type="button" aria-label="Pop the glass bubble"></button>
+    <button class="bubble bubble-edge" type="button" aria-label="Pop the iridescent bubble"></button>
+
+    <button class="butterfly butterfly-blue" type="button" aria-label="Play with the blue butterfly">
+      <span class="wings" aria-hidden="true"><img src="assets/blue-morpho.webp" alt=""><img src="assets/blue-morpho.webp" alt=""></span>
+    </button>
+    <button class="butterfly butterfly-lime" type="button" aria-label="Play with the green butterfly">
+      <span class="wings" aria-hidden="true"><img src="assets/malachite.webp" alt=""><img src="assets/malachite.webp" alt=""></span>
+    </button>
+
+    <div class="particles" aria-hidden="true"></div>
+    <button class="garden-sound" type="button" aria-label="Garden sound" aria-pressed="false"><span class="garden-sound-icon" aria-hidden="true"></span></button>
+    <p class="visually-hidden" role="status" id="garden-status"></p>
+  </main>
+
+  <main class="studio" id="studio" aria-labelledby="studio-title" hidden>
+    <h1 class="visually-hidden" id="studio-title">Glass Studio</h1>
+    <div class="studio-view">
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="assets/aero-studio-portrait-v3.webp" width="992" height="1585">
+        <img class="studio-image" src="assets/aero-studio-wide-v3.webp" width="1672" height="941" alt="">
+      </picture>
+      <button class="screen-entry" type="button" aria-label="Projects &amp; Repositories" aria-haspopup="dialog" aria-controls="project-window">
+        <span class="screen-icon" aria-hidden="true"></span>
+        <span class="screen-label">Projects &amp; Repositories</span>
+      </button>
+      <button class="studio-prop studio-globe" type="button" aria-label="Spin the globe">
+        <span class="globe-surface" aria-hidden="true"></span>
+      </button>
+      <button class="studio-prop music-player" type="button" aria-label="Room music" aria-pressed="false">
+        <span class="music-symbol" aria-hidden="true">♫</span>
+      </button>
+    </div>
+    <div class="particles studio-particles" aria-hidden="true"></div>
+    <a class="garden-return" href="#garden" aria-label="Back to the garden"><span aria-hidden="true">←</span></a>
+    <p class="room-status" role="status"></p>
+    <audio class="room-music" src="assets/music/studio.mp3" preload="metadata" loop muted></audio>
+  </main>
+
+  <dialog class="project-window" id="project-window" aria-labelledby="projects-title">
+    <header class="project-titlebar">
+      <h2 id="projects-title">Projects &amp; Repositories</h2>
+      <form method="dialog"><button class="window-close" type="submit" aria-label="Close projects">×</button></form>
+    </header>
+    <nav class="project-nav" aria-label="Portfolio sections">
+      <button type="button" data-view="repositories" aria-controls="portfolio-repositories" aria-pressed="true">Repositories</button>
+      <button type="button" data-view="projects" aria-controls="portfolio-projects" aria-pressed="false">Projects</button>
+      <button type="button" data-view="about" aria-controls="portfolio-about" aria-pressed="false">About</button>
+    </nav>
+    <div class="project-body">
+      <section class="repository-panel" id="portfolio-repositories" aria-label="Repositories">
+        <p class="repo-status" role="status">Loading public repositories…</p>
+        <ul class="repo-list" aria-label="Public repositories" hidden></ul>
+      </section>
+      <section id="portfolio-projects" aria-label="Projects" hidden></section>
+      <section id="portfolio-about" aria-label="About" hidden></section>
+    </div>
+    <footer class="project-footer">
+      <p class="music-status" role="status"></p>
+      <div class="project-footer-links">
+        <a href="https://github.com/lattiezhao-a11y?tab=repositories">GitHub repositories</a>
+        <a href="https://github.com/lattiezhao-a11y?tab=projects">GitHub Projects</a>
+      </div>
+    </footer>
+    <a class="garden-return" href="#garden" aria-label="Back to the garden" popover="manual"><span aria-hidden="true">&#8592;</span></a>
+  </dialog>
+</body>
+</html>
