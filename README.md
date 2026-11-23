@@ -1,1 +1,1 @@
-# www.lattiezhao-a11y.github.io
+# lattiezhao-a11y.github.io
