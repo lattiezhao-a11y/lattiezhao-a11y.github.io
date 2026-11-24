@@ -3,7 +3,7 @@ const portfolio = {
   welcome: "Welcome to my Frutiger Aero world, the world I wish to seek.",
 
   intro: {
-    name: "Lattie",
+    name: "Lattie Zhao",
     role: "Computer Science Student · Karlsruhe Institute of Technology (KIT)",
     // One row per fact: a short label and its text.
     facts: [
@@ -22,7 +22,7 @@ const portfolio = {
     { label: "AI & LLM", items: ["PyTorch", "Ollama", "LLM APIs"] },
     { label: "Embedded", items: ["STM32", "ESP32", "Raspberry Pi", "Linux"] },
     { label: "Web & App", items: ["HTML", "CSS", "JavaScript", "Flutter"] },
-    { label: "Tools", items: ["Git & GitHub", "Docker", "LaTeX"] },
+    { label: "Tools", items: ["Git & GitHub", "Docker", "LaTeX", "Markdown"] },
   ],
 
   // Add one entry per project. Leave demo or repository empty to omit that link.

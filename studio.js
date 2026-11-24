@@ -245,7 +245,6 @@ function updateMusicPlayer() {
   const audible = soundIsOn();
   const gardenEnabled = musicStarted ? audible : startMusicOnEntry;
   musicPlayer.setAttribute("aria-pressed", String(audible));
-  musicPlayer.querySelector(".music-symbol").textContent = audible ? "Ⅱ" : "♫";
   gardenSound.setAttribute("aria-pressed", String(gardenEnabled));
 }
 

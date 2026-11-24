@@ -346,7 +346,14 @@ body:has(.project-window .garden-return:popover-open) .studio > .garden-return {
   filter: var(--studio-color);
 }
 .music-symbol { display: grid; place-items: center; width: 1.45rem; aspect-ratio: 1; border-radius: 50%; background: #10466be8; border: 1px solid #eaffffb0; box-shadow: 0 2px 8px #09315b91; font-size: .84rem; }
+.music-symbol::before { content: "♫"; }
 .music-player[aria-pressed="true"] .music-symbol { background: #18775d; box-shadow: 0 0 12px #afffe8; }
+.music-player[aria-pressed="true"] .music-symbol::before {
+  content: "";
+  width: .5rem;
+  height: .6rem;
+  border-inline: .15rem solid currentColor;
+}
 .garden-sound { position: absolute; z-index: 4; left: max(1rem, env(safe-area-inset-left)); bottom: max(1rem, env(safe-area-inset-bottom)); display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid #ddfaffcb; border-radius: 50%; background: linear-gradient(#2c81aeea, #12486ff5); color: white; cursor: pointer; }
 .garden-sound[aria-pressed="true"] { background: linear-gradient(#2d977b, #165d61); }
 .garden-sound-icon { position: relative; display: block; width: 1.3rem; height: 1.2rem; }
@@ -469,7 +476,7 @@ body:has(.project-window .garden-return:popover-open) .studio > .garden-return {
   box-shadow: inset 0 1px 0 #fff, 0 4px 12px #21759e22;
 }
 .repo-list .sticker-card { padding-inline-end: 3.6rem; }
-.repo-status { margin: 0; line-height: 1.45; }
+.repo-status { margin: 0; font-family: "Fredoka", "Segoe UI", system-ui, sans-serif; font-weight: 500; line-height: 1.45; }
 .repo-list { margin: .8rem 0 0; padding: 0; display: grid; gap: .55rem; list-style: none; }
 .repo-list li { padding: .65rem .8rem; border: 1px solid #b5dbe8; border-radius: .6rem; background: linear-gradient(#ffffffd9, #def3f9b3); overflow-wrap: anywhere; }
 .repo-name { color: #064b75; font-weight: 700; }
