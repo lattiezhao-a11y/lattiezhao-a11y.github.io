@@ -329,11 +329,64 @@ function addProjectLink(links, value, label) {
 
 function renderPortfolio() {
   const about = document.querySelector("#portfolio-about");
-  for (const paragraph of portfolio.about) {
-    const text = document.createElement("p");
-    text.textContent = paragraph;
-    about.append(text);
+  const welcome = document.createElement("div");
+  const avatar = document.createElement("img");
+  const welcomeText = document.createElement("p");
+  welcome.className = "about-card about-welcome sticker-card";
+  welcome.dataset.sticker = "butterfly";
+  avatar.className = "about-avatar";
+  avatar.src = "assets/about-avatar.jpg";
+  avatar.alt = "A fox reaching for a blue butterfly";
+  avatar.width = 152;
+  avatar.height = 152;
+  avatar.loading = "lazy";
+  welcomeText.textContent = portfolio.welcome;
+  welcome.append(avatar, welcomeText);
+  about.append(welcome);
+
+  const intro = document.createElement("div");
+  const name = document.createElement("h3");
+  const role = document.createElement("p");
+  const facts = document.createElement("dl");
+  intro.className = "about-card about-intro sticker-card";
+  intro.dataset.sticker = "clover";
+  name.className = "about-name";
+  role.className = "about-role";
+  name.textContent = portfolio.intro.name;
+  role.textContent = portfolio.intro.role;
+  for (const fact of portfolio.intro.facts) {
+    const term = document.createElement("dt");
+    const detail = document.createElement("dd");
+    term.textContent = fact.label;
+    detail.textContent = fact.text;
+    facts.append(term, detail);
   }
+  intro.append(name, role, facts);
+  about.append(intro);
+
+  const stack = document.createElement("div");
+  const stackTitle = document.createElement("h3");
+  stack.className = "about-card about-stack sticker-card";
+  stack.dataset.sticker = "cube";
+  stackTitle.textContent = "Tech Stack";
+  stack.append(stackTitle);
+  for (const group of portfolio.stack) {
+    const row = document.createElement("div");
+    const label = document.createElement("span");
+    const items = document.createElement("ul");
+    row.className = "stack-group";
+    label.className = "stack-label";
+    label.textContent = group.label;
+    items.setAttribute("aria-label", group.label);
+    for (const item of group.items) {
+      const chip = document.createElement("li");
+      chip.textContent = item;
+      items.append(chip);
+    }
+    row.append(label, items);
+    stack.append(row);
+  }
+  about.append(stack);
 
   const projects = document.querySelector("#portfolio-projects");
   const list = document.createElement("ul");
@@ -348,6 +401,8 @@ function renderPortfolio() {
     links.className = "featured-links";
     addProjectLink(links, project.demo, "Open project");
     addProjectLink(links, project.repository, "Source code");
+    row.className = "sticker-card";
+    row.dataset.sticker = project.sticker ?? "cube";
     row.append(title, description, links);
     list.append(row);
   }
@@ -369,6 +424,7 @@ renderPortfolio();
 
 function makeRepoRow(repo) {
   const row = document.createElement("li");
+  row.className = "sticker-card";
   const link = document.createElement("a");
   link.className = "repo-name";
   link.href = `https://github.com/${githubOwner}/${encodeURIComponent(repo.name)}`;
