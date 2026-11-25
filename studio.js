@@ -20,6 +20,7 @@ const fallbackSoundtrack = new URL("assets/music/Mii Editor - Mii Maker (Wii U) 
 const roomStatus = document.querySelector(".room-status");
 const musicStatus = document.querySelector(".music-status");
 const projectViews = projectWindow.querySelectorAll("[data-view]");
+const defaultProjectView = projectWindow.querySelector('[data-view="about"]');
 const githubOwner = "lattiezhao-a11y";
 let reposLoaded = false;
 let reposLoading = false;
@@ -344,23 +345,67 @@ function renderPortfolio() {
   about.append(welcome);
 
   const intro = document.createElement("div");
+  const profile = document.createElement("header");
   const name = document.createElement("h3");
   const role = document.createElement("p");
   const facts = document.createElement("dl");
-  intro.className = "about-card about-intro sticker-card";
-  intro.dataset.sticker = "clover";
+  intro.className = "about-card about-intro";
+  profile.className = "about-profile sticker-card";
+  profile.dataset.sticker = "clover";
   name.className = "about-name";
   role.className = "about-role";
   name.textContent = portfolio.intro.name;
   role.textContent = portfolio.intro.role;
-  for (const fact of portfolio.intro.facts) {
+  profile.append(name, role);
+  const travelDuration = 1800;
+  const reflectionInterval = travelDuration + 500;
+  const reflectionCycle = Math.max(1, portfolio.intro.facts.length - 1) * reflectionInterval;
+  // The reflection follows the center strand as the three threads fan out.
+  const reflectionFrames = [
+    [0, 10, 43, 0],
+    [.1, 19, 50, .96],
+    [.23, 30, 70, .72],
+    [.39, 43, 80, 1],
+    [.53, 55, 73, .76],
+    [.7, 70, 61, 1],
+    [.8, 78, 45, .84],
+    [.92, 88, 27, .93],
+    [1, 95, 23, 0],
+  ].map(([progress, x, y, opacity]) => ({
+    offset: progress * travelDuration / reflectionCycle,
+    left: `${x}%`,
+    top: `${y}%`,
+    opacity,
+  }));
+  reflectionFrames.push({ offset: 1, opacity: 0 });
+  for (const [index, fact] of portfolio.intro.facts.entries()) {
+    const row = document.createElement("div");
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
+    row.className = "about-fact";
     term.textContent = fact.label;
     detail.textContent = fact.text;
-    facts.append(term, detail);
+    if (index > 0) {
+      const spark = document.createElement("span");
+      spark.className = "about-current-spark";
+      spark.setAttribute("aria-hidden", "true");
+      const flare = document.createElement("img");
+      flare.src = "assets/about-water-glint.webp";
+      flare.alt = "";
+      flare.width = 200;
+      flare.height = 100;
+      spark.append(flare);
+      detail.append(spark);
+      flare.animate(reflectionFrames, {
+        duration: reflectionCycle,
+        delay: (index - 1) * reflectionInterval,
+        iterations: Infinity,
+      });
+    }
+    row.append(term, detail);
+    facts.append(row);
   }
-  intro.append(name, role, facts);
+  intro.append(profile, facts);
   about.append(intro);
 
   const stack = document.createElement("div");
@@ -408,15 +453,17 @@ function renderPortfolio() {
   projects.append(list);
 }
 
+function showProjectView(view) {
+  for (const button of projectViews) {
+    const active = button === view;
+    button.setAttribute("aria-pressed", String(active));
+    document.getElementById(button.getAttribute("aria-controls")).hidden = !active;
+  }
+  projectWindow.querySelector(".project-body").scrollTop = 0;
+}
+
 for (const view of projectViews) {
-  view.addEventListener("click", () => {
-    for (const button of projectViews) {
-      const active = button === view;
-      button.setAttribute("aria-pressed", String(active));
-      document.getElementById(button.getAttribute("aria-controls")).hidden = !active;
-    }
-    document.querySelector(".project-body").scrollTop = 0;
-  });
+  view.addEventListener("click", () => showProjectView(view));
 }
 
 renderPortfolio();
@@ -489,6 +536,7 @@ function screenTransform() {
 async function openProjects() {
   if (projectWindow.open) return;
   projectWindow.showModal();
+  showProjectView(defaultProjectView);
   modalReturn.showPopover?.();
   loadRepos();
   if (reducedMotion.matches) return;

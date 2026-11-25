@@ -92,19 +92,19 @@
       <form method="dialog"><button class="window-close" type="submit" aria-label="Close projects">×</button></form>
     </header>
     <nav class="project-nav" aria-label="Portfolio sections">
-      <button type="button" data-view="repositories" aria-controls="portfolio-repositories" aria-pressed="true">Repositories</button>
+      <button type="button" data-view="repositories" aria-controls="portfolio-repositories" aria-pressed="false">Repositories</button>
       <button type="button" data-view="projects" aria-controls="portfolio-projects" aria-pressed="false">Projects</button>
-      <button type="button" data-view="about" aria-controls="portfolio-about" aria-pressed="false">About</button>
+      <button type="button" data-view="about" aria-controls="portfolio-about" aria-pressed="true">About</button>
     </nav>
     <div class="project-body">
-      <section class="repository-panel" id="portfolio-repositories" aria-label="Repositories">
+      <section class="repository-panel" id="portfolio-repositories" aria-label="Repositories" hidden>
         <div class="repository-banner sticker-card" data-sticker="folder">
           <p class="repo-status" role="status">Loading public repositories…</p>
         </div>
         <ul class="repo-list" aria-label="Public repositories" hidden></ul>
       </section>
       <section id="portfolio-projects" aria-label="Projects" hidden></section>
-      <section id="portfolio-about" aria-label="About" hidden></section>
+      <section id="portfolio-about" aria-label="About"></section>
     </div>
     <footer class="project-footer">
       <p class="music-status" role="status"></p>
